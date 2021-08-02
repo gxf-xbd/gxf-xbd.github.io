@@ -1,0 +1,48 @@
+Customize Tool
+============================================
+
+.. note::
+    Document of this tutorial is CustomTool.3dm and customTool.gh | Downlaod in Github_
+
+.. _Github: https://github.com/fabunion/FURDocTutorial
+
+
+Most time, the default tool in toolbar cannot meet our request, so we need to customize tool.
+For example by KUKA, we can use 4-points method and 2-points method to get the parameter of tool, namely XYZABC.
+The detail operation of 4-points method and 2-points method will not be introduced here, you can search them in internet.
+By previous operations, we can get XYZABC parameter in robot pad, then we input them to custom tool component:
+
+
+Load tool model
+--------------------------------------------
+
+In Rhino, load the finished mesh model (in CustomTool.3dm), make sure that the **flange plane of tool is align to world plane**.
+
+.. image:: img/a12.png
+
+pick up mesh of the tool model. Then create a ``CustomTool`` component from ``Tool|ExternalAxis|Others`` group.
+Additionally, we need ``GetMatrixFromXYZABC`` component from ``Util`` group, 
+and ``ComposeGeneralPart`` component from ``Tool|ExternalAxis|Others`` group.
+Connect then as figure:
+
+.. image:: img/a14.png
+
+Customize tool
+--------------------------------------------
+Then a custom tool is finished,you can replace the tool of Getting Started with this custom tool:
+
+.. image:: img/a15.png
+.. image:: img/a16.png
+
+Keep the XYZABC parameters of the tool, which can be also used for ABB and UR robots.
+
+.. image:: img/a17.png
+.. image:: img/a18.png
+
+.. note::
+    If the tool parameter is from UR robot,then you should use ``URToolConvert`` for convertion（ABB is similar）:
+
+.. image:: img/a19.png
+.. image:: img/a20.png
+
+
