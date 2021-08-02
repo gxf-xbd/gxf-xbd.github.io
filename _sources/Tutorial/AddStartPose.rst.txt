@@ -1,0 +1,26 @@
+Add a start pose
+============================================
+Start pose defines the initial posture of robot in a program. If you want to change default start pose, you can do like this:
+
+Create start pose
+--------------------------------------------
+Create ``ComposeAngleCmd`` component and setup inputs as below:
+
+.. code:: console
+
+    A1: 30
+    A2: -70
+    A3: 90
+    A4: 10
+    A5: -15
+    A6: -10
+
+.. image:: img/a5.png
+
+Merge MoveCommands
+--------------------------------------------
+We would merge this AngleCmd and the previous Cmds.
+Create Merge component and connect them:
+
+.. image:: img/a6.png
+
