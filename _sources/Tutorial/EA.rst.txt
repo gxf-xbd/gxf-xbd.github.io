@@ -1,0 +1,38 @@
+Use external axis
+============================================
+Sometimes we need print a large scale object, we need the help of external axis
+
+Create a moving path
+--------------------------------------------
+In rhino, generate a line with point A and B as below:
+
+.. code:: console
+
+    A:[0, 0, 0]
+    B:[0, 3000, 0]
+
+Then generate LIN Cmd like this:
+
+.. image:: img/a7.png
+
+Add components
+--------------------------------------------
+Add ``LightPlasticToolhead`` toolhead, ``KR20 R1810`` robot, ``TJLabSingleAxis`` external axis，and connect them as figure:
+
+.. image:: img/a8.png
+
+As you drag simulate slider, you can see the robot does not move along the external axis, because we have not set the external axis value.
+
+Add external axis value
+--------------------------------------------
+Add components as figure below:
+
+.. image:: img/a9.png
+
+Doing these, we generate external axis values corresponding to path points, now external axis value is 0~2700 (with this value, robot can run well).
+
+.. image:: img/a10.png
+
+Now, drag the simulation slider again, you can see the robot print well.
+
+.. image:: img/a11.png
