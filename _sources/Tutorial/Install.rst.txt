@@ -8,8 +8,8 @@ Download&Installation
 
 .. image:: img/install.png
 
-3. Make sure in this folder, no exist previous FUROBOT gha&dll(such as **FUROBOT.gha** and **FUROBOT.dll** ). If exists, just delete them.
+3. Make sure in this folder,no exist previous FUROBOT gha&dll(such as **FUROBOT.gha** and **FUROBOT.dll** ).If exists, just delete them.
 
-4. If you need to use ABB realtime function, you may also need to install `ABB Robot Communication Runtime 6.0.exe <https://github.com/fabunion/FUROBOT>`_ 
+4. If you need to use ABB realtime function,you may also need to install `ABB Robot Communication Runtime 6.0.exe <https://github.com/fabunion/FUROBOT>`_ 
 
-5. Restart Rhino, finish.
+5. Restart Rhino,finish.

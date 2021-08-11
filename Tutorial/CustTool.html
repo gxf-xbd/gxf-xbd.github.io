@@ -55,6 +55,17 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e62c7ca4162b2958aa51a3026d442865";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
   
         <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162072790-1"></script>
@@ -200,20 +211,19 @@
 <h1><span class="section-number">5. </span>Customize Tool<a class="headerlink" href="#customize-tool" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Document of this tutorial is CustomTool.3dm and customTool.gh | Downlaod in <a class="reference external" href="https://github.com/fabunion/FURDocTutorial">Github</a></p>
+<p>Document of this tutorial is CustomTool.3dm , customTool . gh | Downlaod in <a class="reference external" href="https://github.com/fabunion/FURDocTutorial">Github</a></p>
 </div>
-<p>Most time, the default tool in toolbar cannot meet our request, so we need to customize tool.
-For example by KUKA, we can use 4-points method and 2-points method to get the parameter of tool, namely XYZABC.
-The detail operation of 4-points method and 2-points method will not be introduced here, you can search them in internet.
-By previous operations, we can get XYZABC parameter in robot pad, then we input them to custom tool component:</p>
+<p>Most time,the default tool in toolbar cannot meet our request,so we need to customize tool.
+For example by KUKA,we can use 4-points method and 2-points method to get the parameter of tool,namely XYZABC.
+The detail operation of 4-points method and 2-points method will not be introduced here,you can search them in internet.
+By previous operations,we can get XYZABC parameter in robot pad,then we input them to custom tool component:</p>
 <div class="section" id="load-tool-model">
 <h2><span class="section-number">5.1. </span>Load tool model<a class="headerlink" href="#load-tool-model" title="Permalink to this headline">¶</a></h2>
-<p>In Rhino, load the finished mesh model (in CustomTool.3dm), make sure that the <strong>flange plane of tool is align to world plane</strong>.</p>
+<p>In Rhino,load the finished mesh model(in CustomTool.3dm),make sure that the <strong>flange plane of tool is align to world plane.</strong></p>
 <img alt="../_images/a12.png" src="../_images/a12.png" />
-<p>pick up mesh of the tool model. Then create a <code class="docutils literal notranslate"><span class="pre">CustomTool</span></code> component from <code class="docutils literal notranslate"><span class="pre">Tool|ExternalAxis|Others</span></code> group.
-Additionally, we need <code class="docutils literal notranslate"><span class="pre">GetMatrixFromXYZABC</span></code> component from <code class="docutils literal notranslate"><span class="pre">Util</span></code> group,
-and <code class="docutils literal notranslate"><span class="pre">ComposeGeneralPart</span></code> component from <code class="docutils literal notranslate"><span class="pre">Tool|ExternalAxis|Others</span></code> group.
-Connect then as figure:</p>
+<p>Take a mesh component,pick up this tool model:</p>
+<img alt="../_images/a13.png" src="../_images/a13.png" />
+<p>Create a Custom tool component,and connect the previous components:</p>
 <img alt="../_images/a14.png" src="../_images/a14.png" />
 </div>
 <div class="section" id="id1">
@@ -221,12 +231,12 @@ Connect then as figure:</p>
 <p>Then a custom tool is finished,you can replace the tool of Getting Started with this custom tool:</p>
 <img alt="../_images/a15.png" src="../_images/a15.png" />
 <img alt="../_images/a16.png" src="../_images/a16.png" />
-<p>Keep the XYZABC parameters of the tool, which can be also used for ABB and UR robots.</p>
+<p>Keep the XYZABC parameter,the newly done tool can also be used for ABB and UR robots.</p>
 <img alt="../_images/a17.png" src="../_images/a17.png" />
 <img alt="../_images/a18.png" src="../_images/a18.png" />
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If the tool parameter is from UR robot,then you should use <code class="docutils literal notranslate"><span class="pre">URToolConvert</span></code> for convertion（ABB is similar）:</p>
+<p>If the tool parameter is from UR robot,then you should use URToolDataToXYZABC for convertion（ABB is similar）:</p>
 </div>
 <img alt="../_images/a19.png" src="../_images/a19.png" />
 <img alt="../_images/a20.png" src="../_images/a20.png" />

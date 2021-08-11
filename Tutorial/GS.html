@@ -55,6 +55,17 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e62c7ca4162b2958aa51a3026d442865";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
   
         <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162072790-1"></script>
@@ -201,7 +212,7 @@
 <h1><span class="section-number">2. </span>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="create-curve">
 <h2><span class="section-number">2.1. </span>Create curve<a class="headerlink" href="#create-curve" title="Permalink to this headline">¶</a></h2>
-<p>In rhino, create A, B, C points</p>
+<p>In rhino,create A,B,C points</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">A: [650,-200,0]</span>
 <span class="go">B: [750, 0, 0]</span>
 <span class="go">C: [650,200, 0]</span>
@@ -209,32 +220,32 @@
 </div>
 <p>In Rhino Menu: <span class="guilabel">Curve</span> &gt; <span class="guilabel">Free-form</span> &gt; <span class="guilabel">Interpolate</span> points click ABC points,enter to finish.</p>
 <img alt="../_images/a1.png" src="../_images/a1.png" />
-<p>The curve created, now we make robot move along this curve.</p>
+<p>The curve created,now we make robot move along this curve.</p>
 </div>
 <div class="section" id="create-component">
 <h2><span class="section-number">2.2. </span>Create component<a class="headerlink" href="#create-component" title="Permalink to this headline">¶</a></h2>
-<p>Make sure to save the gh file in local file path, name can be any as you like.
-Create a <code class="docutils literal notranslate"><span class="pre">Curve</span> <span class="pre">component</span></code>, and pick up the newly created curve.
-Divide the curvce by <code class="docutils literal notranslate"><span class="pre">divide</span> <span class="pre">component</span></code>, keep the parameters as default.
+<p>Make sure to save the gh file in local file path,name can be any as you like.
+Create a <code class="docutils literal notranslate"><span class="pre">Curve</span> <span class="pre">component</span></code>,and pick up the newly created curve.
+Divide the curvce by <code class="docutils literal notranslate"><span class="pre">divide</span> <span class="pre">component</span></code>,keep the parameters as default.
 Add <code class="docutils literal notranslate"><span class="pre">MoveCmd</span> <span class="pre">component</span></code> (in command group) to canvas:</p>
 <img alt="../_images/a2.png" src="../_images/a2.png" />
-<p>Connect the output of <code class="docutils literal notranslate"><span class="pre">Divide</span> <span class="pre">component</span></code> to input of <code class="docutils literal notranslate"><span class="pre">MoveCmd</span> <span class="pre">component</span></code>,and keep other parameter as default.
-Then, add following component to canvas:</p>
+<p>Connect the output of <code class="docutils literal notranslate"><span class="pre">Divide</span> <span class="pre">component</span></code> to input of <code class="docutils literal notranslate"><span class="pre">MoveCmd</span> <span class="pre">component</span></code>,and keep other parameter as default
+Then,add following component to canvas:</p>
 <ul class="simple">
-<li><p>Number slider (make sure domain between 0.00~1.00)</p></li>
-<li><p>A tool for robot (<code class="docutils literal notranslate"><span class="pre">LightPlasticToolhead</span></code> component in <code class="docutils literal notranslate"><span class="pre">Tool|ExternalAxis|Others</span></code> group)</p></li>
-<li><p>A KUKA robot (<code class="docutils literal notranslate"><span class="pre">Agilus</span> <span class="pre">KR6-KR10</span> <span class="pre">R900</span></code> component in <code class="docutils literal notranslate"><span class="pre">Robot</span></code> group)</p></li>
+<li><p>Number slider(make sure domain between 0.00~1.00)</p></li>
+<li><p>LisghtPlasticToolhead(in <code class="docutils literal notranslate"><span class="pre">Tool|Root|Other</span></code> group)</p></li>
+<li><p>KR6r900 (in <code class="docutils literal notranslate"><span class="pre">Robot</span></code> group)</p></li>
 </ul>
 <p>then connect as figure below:</p>
 <img alt="../_images/a3.png" src="../_images/a3.png" />
 </div>
 <div class="section" id="simulate-and-generate-program">
 <h2><span class="section-number">2.3. </span>Simulate and generate program<a class="headerlink" href="#simulate-and-generate-program" title="Permalink to this headline">¶</a></h2>
-<p>Check your Desktop, you will find a .src file with same name as your GH project. No doubt, this file is offline program for KUKA. You can copy this file to KUKA controller(or by network), then it is necessary to set the same toolhead parameter in KUKA pad. Finally run the program, and you can see the same movement as simulation in real robot!</p>
+<p>Check the save path of gh file,you will find a .src file with same name as gh file. No doubt,this file is offline program of KUKA.You can copy this file to KUKA controller(or by network) ,then it is necessary to set the same toolhead parameter in KUKA pad,then run the program,now you can see the same movement as simulation in real robot!</p>
 <img alt="../_images/a4.png" src="../_images/a4.png" />
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>About <code class="docutils literal notranslate"><span class="pre">MoveCmd</span> <span class="pre">command</span></code>, this case we use its Line mode. Line mode means moving in straight line path, from one point to another. In this case, the curve is divided into small segments. Thus the robot will move in line during the simulation and realtime. We just adjust the division to make lines look like the real curve.</p>
+<p>About <code class="docutils literal notranslate"><span class="pre">MoveCmd</span> <span class="pre">command</span></code>,this case we use its Line mode,Line mode means move from one point to another point, in straight line path. In this case,the curve is divided into many small segments,in real and simulation,robot also move in line,just a short line,so looks like a curve.</p>
 </div>
 </div>
 </div>

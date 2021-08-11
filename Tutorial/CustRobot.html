@@ -55,6 +55,17 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e62c7ca4162b2958aa51a3026d442865";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
   
         <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162072790-1"></script>
@@ -201,23 +212,23 @@
 <h1><span class="section-number">7. </span>Customize KUKA&amp;ABB Robot<a class="headerlink" href="#customize-kuka-abb-robot" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Document of this tutorial is CustomizeRobot.3dm and CustomizeRobot.gh | Downlaod in <a class="reference external" href="https://github.com/fabunion/FURDocTutorial">Github</a></p>
+<p>Document of this tutorial is CustomizeRobot.3dm , CustomizeRobot.gh | Downlaod in <a class="reference external" href="https://github.com/fabunion/FURDocTutorial">Github</a></p>
 </div>
-<p>FUROBOT supports several types of robot, but still a lot of robot cannot be included.
-So we provide customize robot component for KUKA and ABB (UR is all included).
-The method to customize the robot is same in ABB and KUKA, so we provide a example on ABB(IRB 120):</p>
+<p>FUROBOT supports several type of robot,but still a lot of robot cannot be included.
+So we provide customize robot component for KUKA and ABB(UR is all included).
+The method to customize the robot is same in ABB and KUKA,so we provide a example on ABB(IRB 120):</p>
 <img alt="../_images/ABB.png" src="../_images/ABB.png" />
 <div class="section" id="load-robot-model">
 <h2><span class="section-number">7.1. </span>Load Robot model<a class="headerlink" href="#load-robot-model" title="Permalink to this headline">¶</a></h2>
-<p>In Rhino, load the finished robot mesh model (in CustomizeRobot.3dm)
+<p>In Rhino,load the finished robot mesh model(in CustomizeRobot.3dm)
 This model is from ABB official download center</p>
 <img alt="../_images/robotmesh.png" src="../_images/robotmesh.png" />
 </div>
 <div class="section" id="robot-element-and-robot-part">
 <h2><span class="section-number">7.2. </span>Robot element and Robot part<a class="headerlink" href="#robot-element-and-robot-part" title="Permalink to this headline">¶</a></h2>
-<p>Select the base mesh, and put it into a mesh component (you can hide other robot mesh meanwhile):</p>
+<p>Select the base mesh,and put it into a mesh component(you can hide other robot mesh meanwhile):</p>
 <img alt="../_images/R0.png" src="../_images/R0.png" />
-<p>Create a “Robotmesh” for this base, using <code class="docutils literal notranslate"><span class="pre">ComposeGeneralPart</span></code> component. Because its colour should be black, so we input a <code class="docutils literal notranslate"><span class="pre">Colour</span> <span class="pre">Swatch</span></code> component.</p>
+<p>Create a “Robotmesh” for this base,because its colour is black,so we input a “Colour” swatch component.</p>
 <img alt="../_images/R0a.png" src="../_images/R0a.png" />
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -235,9 +246,9 @@ So we can just connect previous robot mesh to this robot part:</p>
 <img alt="../_images/R0c.png" src="../_images/R0c.png" />
 <p>Then we do the same thing to R1 part:</p>
 <img alt="../_images/R1.png" src="../_images/R1.png" />
-<p>Because the R1 part is for rotation, so it must has a limit, we can find this limit from ABB official download center:</p>
+<p>Because the R1 part is for rotation,so it must has a limit,we can find this limit from ABB official download center:</p>
 <img alt="../_images/Limit.png" src="../_images/Limit.png" />
-<p>So, R1’s limit is -165~165 degrees, we add this limit to robot part:</p>
+<p>So,R1’s limit is -165~165 degrees,we add this limit to robot part:</p>
 <img alt="../_images/R1Limit.png" src="../_images/R1Limit.png" />
 </div>
 <div class="section" id="connect">

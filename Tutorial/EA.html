@@ -55,6 +55,17 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e62c7ca4162b2958aa51a3026d442865";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
   
         <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162072790-1"></script>
@@ -118,7 +129,7 @@
 <li class="toctree-l1"><a class="reference internal" href="GS.html">2. Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AddStartPose.html">3. Add a start pose</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">4. Use external axis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-moving-path">4.1. Create a moving path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-start-pose">4.1. Create start pose</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#add-components">4.2. Add components</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#add-external-axis-value">4.3. Add external axis value</a></li>
 </ul>
@@ -199,30 +210,30 @@
             
   <div class="section" id="use-external-axis">
 <h1><span class="section-number">4. </span>Use external axis<a class="headerlink" href="#use-external-axis" title="Permalink to this headline">¶</a></h1>
-<p>Sometimes we need print a large scale object, we need the help of external axis</p>
-<div class="section" id="create-a-moving-path">
-<h2><span class="section-number">4.1. </span>Create a moving path<a class="headerlink" href="#create-a-moving-path" title="Permalink to this headline">¶</a></h2>
-<p>In rhino, generate a line with point A and B as below:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">A:[0, 0, 0]</span>
+<p>Sometimes we need print a large scale object,we need the help of external axis</p>
+<div class="section" id="create-start-pose">
+<h2><span class="section-number">4.1. </span>Create start pose<a class="headerlink" href="#create-start-pose" title="Permalink to this headline">¶</a></h2>
+<p>In rhino,create A and B points.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">A:[0,0,0]</span>
 <span class="go">B:[0, 3000, 0]</span>
 </pre></div>
 </div>
-<p>Then generate LIN Cmd like this:</p>
+<p>Use Line component to generate a line</p>
 <img alt="../_images/a7.png" src="../_images/a7.png" />
 </div>
 <div class="section" id="add-components">
 <h2><span class="section-number">4.2. </span>Add components<a class="headerlink" href="#add-components" title="Permalink to this headline">¶</a></h2>
-<p>Add <code class="docutils literal notranslate"><span class="pre">LightPlasticToolhead</span></code> toolhead, <code class="docutils literal notranslate"><span class="pre">KR20</span> <span class="pre">R1810</span></code> robot, <code class="docutils literal notranslate"><span class="pre">TJLabSingleAxis</span></code> external axis，and connect them as figure:</p>
+<p>Add Metalweldtool toolhead,KR20r1810 robot,TJLabAxis external axis，and connect them as figure:</p>
+<p>Now you drag simulate slider,you can find the robot cannot move along the external axis,so it cannot run the whole path,because we have not set the external axis value</p>
 <img alt="../_images/a8.png" src="../_images/a8.png" />
-<p>As you drag simulate slider, you can see the robot does not move along the external axis, because we have not set the external axis value.</p>
 </div>
 <div class="section" id="add-external-axis-value">
 <h2><span class="section-number">4.3. </span>Add external axis value<a class="headerlink" href="#add-external-axis-value" title="Permalink to this headline">¶</a></h2>
-<p>Add components as figure below:</p>
+<p>Connect components as figure below:</p>
 <img alt="../_images/a9.png" src="../_images/a9.png" />
-<p>Doing these, we generate external axis values corresponding to path points, now external axis value is 0~2700 (with this value, robot can run well).</p>
+<p>The reason for these components is to generate the same count of external axis value as the count of path points,now external axis value is 0~2700(with this value,robot can run well).</p>
 <img alt="../_images/a10.png" src="../_images/a10.png" />
-<p>Now, drag the simulation slider again, you can see the robot print well.</p>
+<p>Now,drag the simulation slider,you can see the robot print well.</p>
 <img alt="../_images/a11.png" src="../_images/a11.png" />
 </div>
 </div>

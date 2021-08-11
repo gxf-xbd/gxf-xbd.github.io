@@ -2,20 +2,20 @@ Customize KUKA&ABB Robot
 ============================================
 
 .. note::
-    Document of this tutorial is CustomizeRobot.3dm and CustomizeRobot.gh | Downlaod in Github_
+    Document of this tutorial is CustomizeRobot.3dm , CustomizeRobot.gh | Downlaod in Github_
 
 .. _Github: https://github.com/fabunion/FURDocTutorial
 
-FUROBOT supports several types of robot, but still a lot of robot cannot be included.
-So we provide customize robot component for KUKA and ABB (UR is all included).
-The method to customize the robot is same in ABB and KUKA, so we provide a example on ABB(IRB 120):
+FUROBOT supports several type of robot,but still a lot of robot cannot be included.
+So we provide customize robot component for KUKA and ABB(UR is all included).
+The method to customize the robot is same in ABB and KUKA,so we provide a example on ABB(IRB 120):
 
 .. image:: img/ABB.png
 
 Load Robot model
 --------------------------------------------
 
-In Rhino, load the finished robot mesh model (in CustomizeRobot.3dm)
+In Rhino,load the finished robot mesh model(in CustomizeRobot.3dm)
 This model is from ABB official download center
 
 .. image:: img/robotmesh.png
@@ -23,11 +23,11 @@ This model is from ABB official download center
 Robot element and Robot part
 --------------------------------------------
 
-Select the base mesh, and put it into a mesh component (you can hide other robot mesh meanwhile):
+Select the base mesh,and put it into a mesh component(you can hide other robot mesh meanwhile):
 
 .. image:: img/R0.png
 
-Create a "Robotmesh" for this base, using ``ComposeGeneralPart`` component. Because its colour should be black, so we input a ``Colour Swatch`` component.
+Create a "Robotmesh" for this base,because its colour is black,so we input a "Colour" swatch component.
 
 .. image:: img/R0a.png
 
@@ -52,11 +52,11 @@ Then we do the same thing to R1 part:
 
 .. image:: img/R1.png
 
-Because the R1 part is for rotation, so it must has a limit, we can find this limit from ABB official download center:
+Because the R1 part is for rotation,so it must has a limit,we can find this limit from ABB official download center:
 
 .. image:: img/Limit.png
 
-So, R1's limit is -165~165 degrees, we add this limit to robot part:
+So,R1's limit is -165~165 degrees,we add this limit to robot part:
 
 .. image:: img/R1Limit.png
 
