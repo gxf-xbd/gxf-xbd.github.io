@@ -322,7 +322,7 @@ class OBSERVE_3D {
         var gl = this.gl;
         gl.useProgram(prog_in.prog);
 
-        gl.frontFace(gl.CW);
+        gl.frontFace(gl.CCW);
         gl.enable(gl.CULL_FACE);
         gl.cullFace(gl.BACK);
 
