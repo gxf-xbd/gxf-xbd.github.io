@@ -205,7 +205,7 @@ function draw(gl, obj, deltaTime, info) {
 
     //obs.draw_obj(obj, frm);
 
-    rbt.show(obs, [cubeRotation, cubeRotation, cubeRotation, cubeRotation, 0.1, 0.1]);
+    rbt.show(obs, [0, cubeRotation, cubeRotation, cubeRotation, 0.1, 0.1]);
 
     cubeRotation += deltaTime;
 
