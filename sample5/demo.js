@@ -91,7 +91,7 @@ class robot {
         var vec3 = tensor_tool.vec3;
 
         await this.init(world,
-            new vec3(0.0, 0.0, 0.0), new vec3(160.0, 400.0, 0.0),
+            new vec3(0.0, 0.0, 0.0), new vec3(160.0, 520.0, 0.0),
             new vec3(980.0, 0.0, 0.0), new vec3(860.0, 150.0, 0.0),
             new vec3(0.0, 0.0, 0.0), new vec3(153.0, 0.0, 0.0),
             new vec3(0.0, 0.0, 0.0),
@@ -105,14 +105,14 @@ class robot {
         var vec3 = tensor_tool.vec3;
 
         await this.init(world,
-            new vec3(0.0, 0.0, 0.0), new vec3(160.0, 400.0, 0.0),
+            new vec3(0.0, 0.0, 0.0), new vec3(160.0, 520.0, 0.0),
             new vec3(780.0, 0.0, 0.0), new vec3(860.0, 150.0, 0.0),
             new vec3(0.0, 0.0, 0.0), new vec3(153.0, 0.0, 0.0),
             new vec3(0.0, 0.0, 0.0),
-            "model/kr6/0.obj", "model/kr6/1.obj",
-            "model/kr6/2.obj", "model/kr6/3.obj",
-            "model/kr6/4.obj", "model/kr6/5.obj",
-            "model/kr6/6.obj");
+            "model/kr20/0.obj", "model/kr20/1.obj",
+            "model/kr20/2.obj", "model/kr20/3.obj",
+            "model/kr20/4.obj", "model/kr20/5.obj",
+            "model/kr20/6.obj");
     }
 
     async init_kr210(world) {
@@ -163,9 +163,9 @@ async function main() {
     obs.init(info, gl, prog_in, 60.0);
 
 
-    const obj = await obs.open_obj("model/kr210/0.obj");
+    const obj = await obs.open_obj("0.obj");
 
-    await rbt.init_kr210(obs);
+    await rbt.init_kr20(obs);
 
 
     var then = 0;
@@ -197,13 +197,13 @@ function draw(gl, obj, deltaTime, info) {
     var frm = new tensor_tool.frame();
     frm = new tensor_tool.frame(
         new tensor_tool.vec3(),
-        tensor_tool.quat.gen_axi(new tensor_tool.vec3(0.0, 1.0, 0.0), cubeRotation)
+        tensor_tool.quat.gen_axi(new tensor_tool.vec3(0.0, 1.0, 0.0), 0)
     );
 
     //frm = frm.on(frm.rev());
 
 
-    //obs.draw_obj(obj, frm);
+    obs.draw_obj(obj, frm);
 
     rbt.show(obs, [0, cubeRotation, cubeRotation, cubeRotation, 0.1, 0.1]);
 
