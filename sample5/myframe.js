@@ -340,6 +340,7 @@ class OBSERVE_3D {
         gl.uniformMatrix4fv(prog_in.unif.mat_proj, false, this.mat_proj);
         gl.uniformMatrix4fv(prog_in.unif.mat_view, false, this.mat_view);
         gl.uniformMatrix4fv(prog_in.unif.mat_mod, false, mat);
+        gl.enable(gl.DEPTH_TEST);
         gl.drawElements(gl.TRIANGLES, obj.cnt, gl.UNSIGNED_SHORT, 0);
     }
 
