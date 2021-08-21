@@ -174,7 +174,6 @@ class OBSERVE_3D {
                 f.pt.x / f.canvas.width - 0.5,
                 0.5 - f.pt.y / f.canvas.height);
             px.mul_(2.0);
-            console.log(px.x, px.y);
 
             var a_xz = tensor_tool.vec2.gen_arc(this.ang.x);
             var a_y = tensor_tool.vec2.gen_arc(this.ang.y);
@@ -205,9 +204,8 @@ class OBSERVE_3D {
             this.a * Math.PI / 180.0,
             f.canvas.width / f.canvas.height,
             0.1,
-            100000.0);
+            1000000.0);
 
-        console.log(this.ang.x, this.ang.y, this.cen.x, this.cen.y, this.cen.z);
         this.mat_view = mat4.create();
         mat4.translate(this.mat_view, this.mat_view, [0.0, 0.0, -this.d]);
         mat4.rotate(this.mat_view, this.mat_view, -this.ang.y, [1.0, 0.0, 0.0]);

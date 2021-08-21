@@ -146,7 +146,7 @@ async function main() {
     canvas.height = window.innerHeight;
 
 
-    var info = init_ctrl(canvas, true);
+    var info = init_ctrl(canvas);
 
     var gl = canvas.getContext("webgl2");
     if (!gl) {
