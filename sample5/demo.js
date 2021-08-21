@@ -148,7 +148,7 @@ async function main() {
 
     var info = init_ctrl(canvas, true);
 
-    var gl = canvas.getContext("webgl");
+    var gl = canvas.getContext("webgl2");
     if (!gl) {
         alert("init WebGL err.");
         return;
