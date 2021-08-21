@@ -193,9 +193,26 @@ class OBSERVE_3D {
             this.bc = true;
         } else this.bc = false;
 
-    }
+        if (!f.key[16]) {
+            var cvec3 = tensor_tool.cvec3;
+            var quat = tensor_tool.quat;
 
-    transform() {
+            var vel = this.d * 0.01;
+            var up = cvec3.y.mul(vel);
+            var g = quat.gen_axi(cvec3.y, -this.ang.x);
+            var front = g.rot_vec(cvec3._z).mul(vel);
+            var right = g.rot_vec(cvec3.x).mul(vel);
+
+            if (f.key[81]) this.cen.add_(up);
+            if (f.key[69]) this.cen.sub_(up);
+
+            if (f.key[87]) this.cen.add_(front);
+            if (f.key[83]) this.cen.sub_(front);
+
+            if (f.key[68]) this.cen.add_(right);
+            if (f.key[65]) this.cen.sub_(right);
+        }
+
         var f = this.info;
         if (!f) return;
 
@@ -204,14 +221,13 @@ class OBSERVE_3D {
             this.a * Math.PI / 180.0,
             f.canvas.width / f.canvas.height,
             0.1,
-            1000000.0);
+            100000.0);
 
         this.mat_view = mat4.create();
         mat4.translate(this.mat_view, this.mat_view, [0.0, 0.0, -this.d]);
         mat4.rotate(this.mat_view, this.mat_view, -this.ang.y, [1.0, 0.0, 0.0]);
         mat4.rotate(this.mat_view, this.mat_view, this.ang.x, [0.0, 1.0, 0.0]);
         mat4.translate(this.mat_view, this.mat_view, [-this.cen.x, -this.cen.y, -this.cen.z]);
-
     }
 
     async open_obj(name) {
@@ -301,7 +317,7 @@ class OBSERVE_3D {
         };
     }
 
-    draw_obj(obj, frm = new tensor_tool.frame()) {
+    draw_obj(obj, frm = tensor_tool.cframe.o) {
 
         var p = frm.xyz;
         var x = frm.x();

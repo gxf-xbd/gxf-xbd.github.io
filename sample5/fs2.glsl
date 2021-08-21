@@ -1,8 +1,12 @@
-precision mediump float;
+precision highp float;
 
 varying lowp float ang;
 
+const vec3 c1 = vec3(0.85, 0.85, 0.7);
+const vec3 c2 = vec3(0.1, 0.1, 0.1);
+
 void main(void) {
-    float c = ang * 0.25 + 0.5;
-    gl_FragColor = vec4(c, c, c, 1);//vec4(1.0);
+    float c = ang * 0.5 + 0.5;
+    //c *= 0.7;
+    gl_FragColor = vec4(c1 * c + c2 * (1.0 - c), 1);
 }

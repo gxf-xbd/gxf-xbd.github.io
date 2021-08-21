@@ -1,4 +1,4 @@
-precision mediump float;
+precision highp float;
 
 attribute vec4 vertex;
 attribute vec4 normal;
