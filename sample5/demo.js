@@ -148,7 +148,7 @@ async function main() {
 
     var info = init_ctrl(canvas, true);
 
-    var gl = canvas.getContext("webgl");
+    var gl = canvas.getContext("webgl2");
     if (!gl) {
         alert("init WebGL err.");
         return;
@@ -160,7 +160,7 @@ async function main() {
         "mat_proj", "mat_view", "mat_mod"
     ]);
 
-    obs.init(info, gl, prog_in, 60.0);
+    obs.init(info, gl, prog_in, 120.0);
 
 
     const obj = await obs.open_obj("0.obj");
