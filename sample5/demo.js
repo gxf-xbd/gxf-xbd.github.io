@@ -27,6 +27,35 @@ async function setup() {
 
 
 
+    if ("WebSocket" in window) {
+
+        ws = new WebSocket("ws://127.0.0.1:8183");
+        console.log(ws);
+
+        ws.onopen = function() {
+            console.log("open");　　
+            ws.send("hello777777723432424");
+        }
+        ws.onerror = function() {
+            console.log("err");　
+        }
+        ws.onmessage = function(e) {
+            console.log(e.data);
+        }
+        ws.onclose = function(e) {
+            console.log("close");
+        }
+        ws.onerror = function(e) {
+            console.log(e.error);
+        }
+        console.log("ok");　
+    } else {
+        console.log("您的浏览器不支持WebSocket");　
+    }
+
+
+
+
     const obj = await obs.open_obj("0.obj");
 
     await rbt.init_kr210(obs);
@@ -60,7 +89,7 @@ function loop(gl, obj, deltaTime) {
 
     obs.draw_obj(obj, cframe.o);
 
-    rbt.show(obs, [0, cubeRotation, cubeRotation, cubeRotation, 0.1, 0.1]);
+    rbt.show(obs, [0, cubeRotation, -cubeRotation, cubeRotation, 0.1, 0.1]);
 
     cubeRotation += deltaTime;
 

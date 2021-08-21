@@ -12,6 +12,7 @@ function init_ctrl(canvas, log = false) {
             y: 0.0
         },
         pt_v: 0,
+        touch: [],
         canvas: canvas
     }
 
@@ -47,8 +48,8 @@ function init_ctrl(canvas, log = false) {
     });
 
     add_event("mousemove", event => {
-        info.pt.x = event.pageX * 1.0;
-        info.pt.y = event.pageY * 1.0;
+        info.pt.x = event.pageX;
+        info.pt.y = event.pageY;
         //logout(info.pt.x, info.pt.y);
         info.pt_v++;
     });
@@ -73,9 +74,15 @@ function init_ctrl(canvas, log = false) {
         }
     });
 
-    add_event("touchstart", event => {
-        logout("tch");
-    });
+    var on_touch = event => {
+        if (!event.touches) info.touch = [];
+        else info.touch = event.touches;
+        //logout("tch", event.touches);
+    };
+
+    add_event("touchstart", on_touch);
+    add_event("touchmove", on_touch);
+    add_event("touchend", on_touch);
 
     add_event("selectstart", event => {});
 
@@ -148,70 +155,147 @@ class OBSERVE_3D {
         this.prog_info = prog_info;
 
         this.a = angle;
-        this.bc = false;
-
         this.cen = new tensor_tool.vec3(0.0);
-        this.dc = new tensor_tool.vec3(0.0);
-
         this.ang = new tensor_tool.vec2(0.0);
-        this.mem_ang = new tensor_tool.vec2(0.0);
         this.d = 2000.0;
+
+        this.mode = 0; // 1: mouse, 2: touch
+
+        this.touch0 = this.touch1 = -1;
+
+        this.last_pt = null;
+        this.touch = {};
+        this.num_ctrl = -1;
+
+        this.base_sc0 = 1.0 / 2000.0;
+        this.base_sc1 = 0.0;
     }
 
     update() {
+        var vec2 = tensor_tool.vec2;
+
         var f = this.info;
         if (!f) return;
 
-        this.d = f.scale * 2000.0;
+        this.d = f.scale / this.base_sc0;
 
-        var tmp = new tensor_tool.vec2(f.pt.x, -f.pt.y).mul(0.006);
+        function move_cam(self, mode, dx, dy) {
+            if (mode) {
+                var a_xz = tensor_tool.vec2.gen_arc(self.ang.x);
+                var a_y = tensor_tool.vec2.gen_arc(self.ang.y);
 
-        if (f.mouse[1] && !f.key[16]) this.ang = tmp.add(this.mem_ang);
-        else this.mem_ang = this.ang.sub(tmp);
+                var k = new tensor_tool.vec3(a_xz.y * a_y.x, a_y.y, -a_xz.x * a_y.x).vec();
+                var j = new tensor_tool.vec3(-a_xz.y * a_y.y, a_y.x, a_xz.x * a_y.y).vec();
+                var i = j.crs(k);
 
-        if (f.mouse[1] && f.key[16]) {
-            var px = new tensor_tool.vec2(
-                f.pt.x / f.canvas.width - 0.5,
-                0.5 - f.pt.y / f.canvas.height);
-            px.mul_(2.0);
+                var h = Math.sin(self.a * 0.5 * Math.PI / 180.0);
+                j.mul_(h);
+                i.mul_(h * f.canvas.width / f.canvas.height);
 
-            var a_xz = tensor_tool.vec2.gen_arc(this.ang.x);
-            var a_y = tensor_tool.vec2.gen_arc(this.ang.y);
+                var ds = i.mul(-dx * 2.0 / f.canvas.width).add(
+                    j.mul(dy * 2.0 / f.canvas.width)).mul(self.d);
 
-            var k = new tensor_tool.vec3(a_xz.y * a_y.x, a_y.y, -a_xz.x * a_y.x).vec();
-            var j = new tensor_tool.vec3(-a_xz.y * a_y.y, a_y.x, a_xz.x * a_y.y).vec();
-            var i = j.crs(k);
-
-            var h = Math.sin(this.a * 0.5 * Math.PI / 180.0);
-            j.mul_(h);
-            i.mul_(h * f.canvas.width / f.canvas.height);
-
-            var ds = i.mul(-px.x).add(j.mul(-px.y)).mul(this.d);
-
-            if (!this.bc) this.dc = this.cen.sub(ds);
-            this.cen = this.dc.add(ds);
-            this.bc = true;
-        } else this.bc = false;
-
-        if (!f.key[16]) {
-            var cvec3 = tensor_tool.cvec3;
-            var quat = tensor_tool.quat;
-
-            var vel = this.d * 0.01;
-            var up = cvec3.y.mul(vel);
-            var g = quat.gen_axi(cvec3.y, -this.ang.x);
-            var front = g.rot_vec(cvec3._z).mul(vel);
-            var right = g.rot_vec(cvec3.x).mul(vel);
-
-            if (f.key[81]) this.cen.add_(up);
-            if (f.key[69]) this.cen.sub_(up);
-
-            if (f.key[87]) this.cen.add_(front);
-            if (f.key[83]) this.cen.sub_(front);
-
-            if (f.key[68]) this.cen.add_(right);
-            if (f.key[65]) this.cen.sub_(right);
+                self.cen.add_(ds);
+            } else self.ang.add_(new tensor_tool.vec2(dx, -dy).mul(0.006));
         }
+
+        if (this.mode != 2) {
+
+            if (f.mouse[1]) {
+                if (this.last_pt != null) {
+                    var dx = f.pt.x - this.last_pt.x;
+                    var dy = f.pt.y - this.last_pt.y;
+                    move_cam(this, f.key[16], dx, dy);
+                }
+                this.last_pt = { x: f.pt.x, y: f.pt.y };
+            } else this.last_pt = null;
+
+            if (!f.key[16]) {
+                var cvec3 = tensor_tool.cvec3;
+                var quat = tensor_tool.quat;
+
+                var vel = this.d * 0.01;
+                var up = cvec3.y.mul(vel);
+                var g = quat.gen_axi(cvec3.y, -this.ang.x);
+                var front = g.rot_vec(cvec3._z).mul(vel);
+                var right = g.rot_vec(cvec3.x).mul(vel);
+
+                if (f.key[81]) this.cen.add_(up);
+                if (f.key[69]) this.cen.sub_(up);
+
+                if (f.key[87]) this.cen.add_(front);
+                if (f.key[83]) this.cen.sub_(front);
+
+                if (f.key[68]) this.cen.add_(right);
+                if (f.key[65]) this.cen.sub_(right);
+            }
+
+            if (f.mouse[1] ||
+                f.key[81] || f.key[69] ||
+                f.key[87] || f.key[83] ||
+                f.key[68] || f.key[65])
+                this.mode = 1;
+            else this.mode = 0;
+        }
+
+        {
+            var changed = false;
+            var ctrl = [];
+            var tch = {};
+
+            for (var i = 0; i < f.touch.length; i++) {
+                const t1 = f.touch[i];
+                var p = new vec2(t1.pageX, t1.pageY);
+
+                var t2 = this.touch[t1.identifier];
+
+                if (!t2) t2 = { p: p, s: false };
+                else if (t2.s) ctrl.push(t2);
+                t2.dp = p.sub(t2.p);
+                t2.p = p;
+                tch[t1.identifier] = t2;
+            }
+            this.touch = tch;
+
+            for (var i in tch) {
+                if (ctrl.length >= 3) break;
+                if (tch[i].s) continue;
+                tch[i].s = true;
+                ctrl.push(tch[i]);
+                changed = true;
+            }
+
+            if (ctrl.length > 0 && this.mode != 1) {
+                var p = new vec2();
+                var dp = new vec2();
+                for (var i in ctrl) {
+                    p.add_(ctrl[i].p);
+                    dp.add_(ctrl[i].dp);
+                }
+                p.div_(ctrl.length);
+                dp.div_(ctrl.length);
+
+                var dst = 0.0;
+                for (var i in ctrl) dst += ctrl[i].p.sub(p).len();
+                dst /= ctrl.length;
+
+                if (this.num_ctrl == ctrl.length &&
+                    ctrl.length > 1 && !changed) this.base_sc0 *= dst / this.base_sc1;
+                this.base_sc1 = dst;
+
+                console.log(dst);
+
+                move_cam(this, ctrl.length > 1, dp.x, dp.y);
+
+                this.mode = 2;
+            } else this.mode = 0;
+
+            this.num_ctrl = ctrl.length;
+        }
+
+
+
+
 
         var f = this.info;
         if (!f) return;
