@@ -1,4 +1,4 @@
-const robot_tool = {};
+let robot_tool = {};
 
 {
     class com {
@@ -16,7 +16,7 @@ const robot_tool = {};
         }
 
         trans(arc, c) {
-            var d = tensor_tool.quat.gen_axi(this.a, arc);
+            let d = tensor_tool.quat.gen_axi(this.a, arc);
             this.rb = c.rb.add(c.rd.rot_vec(c.e));
             this.rd = c.rd.cook(d);
         }
@@ -42,7 +42,7 @@ const robot_tool = {};
         constructor() {
 
             this.coms = [];
-            for (var i = 0; i < 7; i++) this.coms.push(new com());
+            for (let i = 0; i < 7; i++) this.coms.push(new com());
 
             this.base = new tensor_tool.frame();
         }
@@ -50,10 +50,10 @@ const robot_tool = {};
         async init(world, t0, t1, t2, t3, t4, t5, t6,
             o0, o1, o2, o3, o4, o5, o6) {
 
-            var cquat = tensor_tool.cquat;
-            var cvec3 = tensor_tool.cvec3;
+            let cquat = tensor_tool.cquat;
+            let cvec3 = tensor_tool.cvec3;
 
-            var trs = cvec3.o;
+            let trs = cvec3.o;
 
             trs = await this.coms[0].init(world, o0, trs, cquat.o, t0, cvec3._y);
             trs = await this.coms[1].init(world, o1, trs, cquat.o, t1, cvec3._y);
@@ -65,7 +65,7 @@ const robot_tool = {};
         }
 
         async init_kr6(world) {
-            var vec3 = tensor_tool.vec3;
+            let vec3 = tensor_tool.vec3;
 
             await this.init(world,
                 new vec3(0.0, 0.0, 0.0), new vec3(25.0, 400.0, 0.0),
@@ -79,7 +79,7 @@ const robot_tool = {};
         }
 
         async init_kr16(world) {
-            var vec3 = tensor_tool.vec3;
+            let vec3 = tensor_tool.vec3;
 
             await this.init(world,
                 new vec3(0.0, 0.0, 0.0), new vec3(160.0, 520.0, 0.0),
@@ -93,7 +93,7 @@ const robot_tool = {};
         }
 
         async init_kr20(world) {
-            var vec3 = tensor_tool.vec3;
+            let vec3 = tensor_tool.vec3;
 
             await this.init(world,
                 new vec3(0.0, 0.0, 0.0), new vec3(160.0, 520.0, 0.0),
@@ -107,7 +107,7 @@ const robot_tool = {};
         }
 
         async init_kr210(world) {
-            var vec3 = tensor_tool.vec3;
+            let vec3 = tensor_tool.vec3;
 
             await this.init(world,
                 new vec3(0.0, 0.0, 0.0), new vec3(350.0, 675.0, 0.0),
@@ -122,8 +122,8 @@ const robot_tool = {};
 
         show(world, ax, tool = null) {
             this.coms[0].trans_f(this.base);
-            for (var i = 0; i < 6; i++) this.coms[i + 1].trans(ax[i], this.coms[i]);
-            for (var i = 0; i < 7; i++) this.coms[i].show(world);
+            for (let i = 0; i < 6; i++) this.coms[i + 1].trans(ax[i], this.coms[i]);
+            for (let i = 0; i < 7; i++) this.coms[i].show(world);
             //if (tool) tool.show(world, this.coms[6].rb, this.coms[6].rd);
         }
     };

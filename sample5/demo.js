@@ -1,23 +1,23 @@
-var cubeRotation = 0.0;
-var rbt = new robot_tool.robot();
+let cubeRotation = 0.0;
+let rbt = new robot_tool.robot();
 
 
 async function setup() {
 
-    var canvas = document.querySelector("#glcanvas");
+    let canvas = document.querySelector("#glcanvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
 
-    var info = init_ctrl(canvas, true);
+    let info = init_ctrl(canvas, true);
 
-    var gl = canvas.getContext("webgl");
+    let gl = canvas.getContext("webgl");
     if (!gl) {
         alert("init WebGL err.");
         return;
     }
 
-    const prog_in = await init_prog(gl, "vs2.glsl", "fs2.glsl", [
+    let prog_in = await init_prog(gl, "vs2.glsl", "fs2.glsl", [
         "vertex", "normal"
     ], [
         "mat_proj", "mat_view", "mat_mod"
@@ -56,16 +56,16 @@ async function setup() {
 
 
 
-    const obj = await obs.open_obj("0.obj");
+    let obj = await obs.open_obj("0.obj");
 
     await rbt.init_kr210(obs);
 
 
-    var then = 0;
+    let then = 0;
 
     function render(now) {
         now *= 0.001; // convert to seconds
-        const deltaTime = now - then;
+        let deltaTime = now - then;
         then = now;
 
         loop(gl, obj, deltaTime);
@@ -85,7 +85,7 @@ function loop(gl, obj, deltaTime) {
 
     obs.update();
 
-    var cframe = tensor_tool.cframe;
+    let cframe = tensor_tool.cframe;
 
     obs.draw_obj(obj, cframe.o);
 
