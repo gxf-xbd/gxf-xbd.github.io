@@ -46,7 +46,7 @@ async function setup() {
         div.appendChild(txt3);
 
         let txt2 = document.createElement("font");
-        txt2.innerHTML = "aefffffffffffffffffffffffffaf<br />";
+        txt2.innerHTML = "aefff<br />";
         txt2.style.fontSize = "20px";
         div.appendChild(txt2);
 

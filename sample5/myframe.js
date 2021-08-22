@@ -97,6 +97,9 @@ function init_ctrl(canvas, log = false) {
 
     add_event("selectstart", event => { logout("slect"); });
 
+    add_event("click", event => { logout("kkkk"); });
+    add_event("dblclick", event => { logout("kkkk"); });
+
     return info;
 }
 
