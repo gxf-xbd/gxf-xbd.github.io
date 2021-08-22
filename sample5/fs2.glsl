@@ -2,7 +2,7 @@ precision highp float;
 
 varying lowp float ang;
 
-const vec3 c1 = vec3(0.85, 0.85, 0.7);
+const vec3 c1 = vec3(0.2, 0.5, 0.8);
 const vec3 c2 = vec3(0.1, 0.1, 0.1);
 
 void main(void) {

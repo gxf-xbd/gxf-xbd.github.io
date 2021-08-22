@@ -13,6 +13,27 @@
 
 </head>
 
+<body>
+    <div class="canv">
+        <canvas id="glcanvas"></canvas>
+    </div>
+
+
+    <div id="main_div" class="soft-shadow" width=400px height=300>
+        <font size="5" color="whilte">
+            KUKA KR210-R2700
+        </font>
+        <button type="button">Click Me!</button>
+        <button type="button">Click Me!</button>
+        <button type="button">Click Me!</button>
+        <button type="button">Click Me!</button>
+        <button type="button">Click Me!</button>
+        <button type="button">Click Me!</button>
+    </div>
+
+
+</body>
+
 <style>
     * {
         margin: 0;
@@ -21,6 +42,7 @@
     
     html,
     body {
+        overflow: hidden;
         height: 100%;
         width: 100%;
     }
@@ -29,17 +51,49 @@
         display: block;
         background: #000000;
     }
+    
+    button {
+        /*margin: 50px;
+        padding: 50px 80px;*/
+        outline: none;
+        color: #001f3f;
+        border: 0px;
+        /*border-radius: 24px;*/
+        background: #ffffff;
+        background-color: rgba(255, 255, 255, 0.3);
+        /*box-shadow: 5px 5px 10px #000000, -5px -5px 10px #ffffff;*/
+        transform: scale(1.0);
+    }
+    
+    button:hover {
+        background-color: rgba(255, 255, 255, 255);
+    }
+    
+    button:active {
+        background-color: rgba(255, 255, 255, 255);
+    }
+    
+    .soft-shadow {
+        overflow: hidden;
+        max-width: 200px;
+        color: #001f3f;
+        padding: 30px 30px;
+        border-radius: 20px;
+        /*background-color: transparent;*/
+        background-color: rgba(1, 1, 1, 0);
+        box-shadow: 10px 10px 8px rgba(1, 0, 0, 0.5);
+        /*opacity: 0.3;*/
+        transform: scale(0.5);
+    }
+    
+    .soft-shadow:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .canv {
+        position: absolute;
+        z-index: -1;
+    }
 </style>
-
-<body>
-    <div style="position:absolute; z-index:-1">
-        <canvas id="glcanvas"></canvas>
-    </div>
-
-    <font size="3" color="red">
-        This is some text!
-    </font>
-    <button type="button">Click Me!</button>
-</body>
 
 </html>

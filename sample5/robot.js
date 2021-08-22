@@ -120,8 +120,8 @@ let robot_tool = {};
                 "model/kr210/6.obj");
         }
 
-        show(world, ax, tool = null) {
-            this.coms[0].trans_f(this.base);
+        show(world, ax, base = tensor_tool.cframe.o) {
+            this.coms[0].trans_f(base);
             for (let i = 0; i < 6; i++) this.coms[i + 1].trans(ax[i], this.coms[i]);
             for (let i = 0; i < 7; i++) this.coms[i].show(world);
             //if (tool) tool.show(world, this.coms[6].rb, this.coms[6].rd);

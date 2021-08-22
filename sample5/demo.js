@@ -1,6 +1,7 @@
 let cubeRotation = 0.0;
 let rbt = new robot_tool.robot();
 
+let btn = null;
 
 async function setup() {
 
@@ -25,6 +26,18 @@ async function setup() {
 
     obs.init(info, gl, prog_in, 60.0);
 
+    {
+        let body = document.body;
+        let div = document.getElementById("main_div");
+        btn = document.createElement("button");
+        btn.innerHTML = "feskjyfffffffffffffffffef";
+        btn = div;
+        btn.style.position = "absolute";
+        btn.style.left = "400px";
+        btn.style.top = "400px";
+        body.appendChild(btn);
+        console.log(btn.style);
+    }
 
 
     if ("WebSocket" in window) {
@@ -52,9 +65,6 @@ async function setup() {
     } else {
         console.log("您的浏览器不支持WebSocket");　
     }
-
-
-
 
     let obj = await obs.open_obj("0.obj");
 
@@ -85,13 +95,27 @@ function loop(gl, obj, deltaTime) {
 
     obs.update();
 
+    let frame = tensor_tool.frame;
     let cframe = tensor_tool.cframe;
+    let cquat = tensor_tool.cquat;
+    let vec3 = tensor_tool.vec3;
 
     obs.draw_obj(obj, cframe.o);
 
-    rbt.show(obs, [0, cubeRotation, -cubeRotation, cubeRotation, 0.1, 0.1]);
+    rbt.show(obs, [cubeRotation, cubeRotation, -cubeRotation, cubeRotation, cubeRotation, 0.1]);
 
     cubeRotation += deltaTime;
+
+    let px = obs.to_screen(new vec3(0, 1500, 0));
+    if (px) {
+        btn.style.left = px.x - btn.clientWidth / 2 + "px";
+        btn.style.top = px.y - btn.clientHeight / 2 + "px";
+        let sc = 3000.0 * px.z;
+        if (sc < 0.1) sc = 0.1;
+        else if (sc > 2.0) sc = 2.0;
+        btn.style.transform = "scale(" + sc + ")";
+        console.log();
+    }
 
 }
 

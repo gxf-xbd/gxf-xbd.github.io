@@ -419,29 +419,38 @@ class OBSERVE_3D {
     }
 
 
-    /*vec2 to_screen(vec3 p = 0.0 f) {
-        vec2 a_xz, a_y;
-        a_xz.vec(ang.x);
-        a_y.vec(ang.y);
+    to_screen(pp = tensor_tool.cvec3.o) {
 
-        vec3 vk = -vec3(a_xz.x * a_y.x, a_y.y, a_xz.y * a_y.x);
-        vec3 vj = vec3(-a_xz.x * a_y.y, a_y.x, -a_xz.y * a_y.y);
-        vec3 vi = crs(vj, vk);
+        let f = this.info;
+        if (!f) return null;
 
-        p += vk * d - cen;
+        function in_screen(p) {
+            return p.x <= 1.0 && p.y <= 1.0 && p.x >= -1.0 && p.y >= -1.0;
+        }
 
-        auto z = dot(vk, p);
-        if (z < 0) return -2.0 f;
-        auto pt = vec2(dot(vi, p) / r, dot(vj, p)) / (z * tan(cfloat::to_arc * a * 0.5 f));
-        if (in_screen(pt)) return pt;
-        return -1000.0 f;
+        let vec2 = tensor_tool.vec2;
+        let vec3 = tensor_tool.vec3;
+
+        let a_xz = vec2.gen_arc(this.ang.x);
+        let a_y = vec2.gen_arc(this.ang.y);
+
+        let k = new vec3(-a_xz.y * a_y.x, -a_y.y, a_xz.x * a_y.x).vec();
+        let j = new vec3(-a_xz.y * a_y.y, a_y.x, a_xz.x * a_y.y).vec();
+        let i = k.crs(j);
+
+        let p = pp.sub(this.cen);
+        let z = -k.dot(p) + this.d;
+        if (z < 0) return null;
+        let x = i.dot(p);
+        let y = j.dot(p);
+        let h = f.canvas.height / (Math.tan(this.a * 0.5 * Math.PI / 180.0) * 2.0 * z);
+        let pt = new vec3(
+            x * h + f.canvas.width / 2, -y * h + f.canvas.height / 2,
+            1.0 / z);
+        return pt;
     }
 
-    static bool in_screen(vec2_ p) {
-        return p.x <= 1.0 f && p.y <= 1.0 f && p.x >= -1.0 f && p.y >= -1.0 f;
-    }
-
-    vec2 to_screen_px(vec3_ pt = 0.0 f) {
+    /*vec2 to_screen_px(vec3_ pt = 0.0 f) {
         return (to_screen(pt) * 0.5 f + vec2(0.5 f)) * vec2(f - > rect[2], f - > rect[3]);
     }
 
@@ -499,7 +508,7 @@ class OBSERVE_3D {
         vec3 p = vec3(0.0 f);
         vec3 t = p + vec3(a_xz.x * a_y.x, a_y.y, a_xz.y * a_y.x) * d;
         return t;
-    }*/
+    } */
 
 }
 
