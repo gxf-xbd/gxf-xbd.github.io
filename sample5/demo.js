@@ -116,20 +116,20 @@ function loop(gl, obj, deltaTime) {
 
     obs.draw_obj(obj, cframe.o);
 
-    rbt.show(obs, [0, cubeRotation * 3, -cubeRotation, cubeRotation / 4, cubeRotation, 0.1]);
+    rbt.show(obs, [cubeRotation, cubeRotation * 3, -cubeRotation, cubeRotation / 4, cubeRotation, 0.1]);
 
     cubeRotation += deltaTime;
 
-    let px = obs.to_screen(new vec3(0, 1500, 0));
+    let px = obs.to_screen(new vec3(0, 1000, 0));
     if (px) {
         btn.style.left = px.x - btn.clientWidth / 2 + "px";
-        btn.style.top = px.y - btn.clientHeight / 2 + "px";
+        btn.style.top = px.y - btn.clientHeight + "px";
         let sc = 3000.0 * px.z;
         if (sc < 0.1) sc = 0.1;
         else if (sc > 2.0) sc = 2.0;
         btn.style.transform = "scale(" + sc + ")";
-        console.log();
     }
+    console.log(document.activeElement.tagName);
 
 }
 

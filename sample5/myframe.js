@@ -21,9 +21,9 @@ function init_ctrl(canvas, log = false) {
 
     function add_event(flag, on_call) {
         window.addEventListener(flag, event => {
-            if (on_call) on_call(event);
-            if (event.keyCode >= 112) return;
-            if (event.keyCode <= 123) return;
+            if (on_call)
+                if (on_call(event)) return;
+            event.stopPropagation();
             event.preventDefault();
         }, {
             passive: false
@@ -31,6 +31,8 @@ function init_ctrl(canvas, log = false) {
     }
 
     add_event("keydown", event => {
+        if (event.keyCode >= 112 && event.keyCode <= 123) return true;
+        if (document.activeElement.tagName == "INPUT") return true;
         let i = event.keyCode;
         if (!info.key[i]) {
             info.key[i] = true;
@@ -49,19 +51,22 @@ function init_ctrl(canvas, log = false) {
         info.pt.y = event.pageY;
         //logout(info.pt.x, info.pt.y);
         info.pt_v++;
+        return true;
     });
     add_event("mousedown", event => {
         let i = event.button;
         if (!info.mouse[i]) {
             info.mouse[i] = true;
             info.mouse_v++;
-            logout("ms dn", i);
+            logout("ms dn", i, document.activeElement.tagName);
         }
+        return true;
     });
     add_event("mouseup", event => {
         let i = event.button;
         if (info.mouse[i]) info.mouse[i] = false;
         logout("ms up", i);
+        return true;
     });
     add_event("wheel", event => {
         if (!event.ctrlKey) {
@@ -71,17 +76,26 @@ function init_ctrl(canvas, log = false) {
         }
     });
 
-    let on_touch = event => {
+    add_event("touchstart", event => {
         if (!event.touches) info.touch = [];
         else info.touch = event.touches;
-        //logout("tch", event.touches);
-    };
+        return true;
+    });
+    add_event("touchmove", event => {
+        if (!event.touches) info.touch = [];
+        else info.touch = event.touches;
+    });
+    add_event("touchend", event => {
+        if (!event.touches) info.touch = [];
+        else info.touch = event.touches;
+        return true;
+    });
 
-    add_event("touchstart", on_touch);
-    add_event("touchmove", on_touch);
-    add_event("touchend", on_touch);
+    add_event("gesturestart", event => { logout("1"); });
+    add_event("gesturechange", event => { logout("2"); });
+    add_event("gestureend", event => { logout("3"); });
 
-    add_event("selectstart", event => {});
+    add_event("selectstart", event => { logout("slect"); });
 
     return info;
 }
