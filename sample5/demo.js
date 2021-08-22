@@ -28,15 +28,29 @@ async function setup() {
 
     {
         let body = document.body;
-        let div = document.getElementById("main_div");
-        btn = document.createElement("button");
-        btn.innerHTML = "feskjyfffffffffffffffffef";
+
+        let div = document.createElement("div");
+        div.style.position = "absolute";
+        div.className = "pad2";
+        body.appendChild(div);
         btn = div;
-        btn.style.position = "absolute";
-        btn.style.left = "400px";
-        btn.style.top = "400px";
-        body.appendChild(btn);
-        console.log(btn.style);
+
+        let txt1 = document.createElement("font");
+        txt1.innerHTML = "KUKA<br />";
+        txt1.style.fontSize = "20px";
+        div.appendChild(txt1);
+
+        let txt3 = document.createElement("font");
+        txt3.innerHTML = "KR210-R2700<br />";
+        txt3.style.fontSize = "20px";
+        div.appendChild(txt3);
+
+        let txt2 = document.createElement("font");
+        txt2.innerHTML = "aefffffffffffffffffffffffffaf<br />";
+        txt2.style.fontSize = "20px";
+        div.appendChild(txt2);
+
+
     }
 
 
@@ -87,7 +101,7 @@ async function setup() {
 
 function loop(gl, obj, deltaTime) {
 
-    gl.clearColor(0.5, 0.5, 0.5, 1.0);
+    gl.clearColor(0.3, 0.3, 0.3, 1.0);
     gl.clearDepth(1.0);
     gl.enable(gl.DEPTH_TEST);
     gl.depthFunc(gl.LEQUAL);
@@ -102,7 +116,7 @@ function loop(gl, obj, deltaTime) {
 
     obs.draw_obj(obj, cframe.o);
 
-    rbt.show(obs, [0, cubeRotation, -cubeRotation, cubeRotation, cubeRotation, 0.1]);
+    rbt.show(obs, [0, cubeRotation * 3, -cubeRotation, cubeRotation / 4, cubeRotation, 0.1]);
 
     cubeRotation += deltaTime;
 

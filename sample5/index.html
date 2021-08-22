@@ -19,15 +19,28 @@
     </div>
 
 
-    <div id="main_div" class="soft-shadow" width=400px height=300>
-        <font size="5"> KUKA KR210-R2700 </font>
-        <font size="5"> "model/kr20/0.obj", "model/kr20/1.obj", "model/kr20/2.obj", "model/kr20/3.obj", "model/kr20/4.obj", "model/kr20/5.obj", "model/kr20/6.obj") </font>
-        <button type="button">Click Me!</button>
-        <button type="button">Click Me!</button>
-        <button type="button">Click Me!</button>
-        <button type="button">Click Me!</button>
-        <button type="button">Click Me!</button>
-        <button type="button">Click Me!</button>
+    <div id="main_div" class="pad1" width=400px height=300>
+        <font size="10"><b> KUKA </b></font>
+        </br>
+        <font size="10"><b> KR210-R2700 </b></font>
+        </br>
+        <input type="submit" value="0" style="width:100%;height:50px">
+        </br>
+        <font size="5">
+            "model/kr20/0.obj",</br>
+            "model/kr20/1.obj",</br>
+            "model/kr20/2.obj",</br>
+            "model/kr20/3.obj",</br>
+            "model/kr20/4.obj", </br>
+            "model/kr20/5.obj", </br>
+            "model/kr20/6.obj") </font>
+        </br>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button></br>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button></br>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button></br>
     </div>
 
 
@@ -53,40 +66,51 @@
     }
     
     button {
-        /*margin: 50px;
-        padding: 50px 80px;*/
+        margin: 20px;
+        padding: 20px 20px;
         outline: none;
         color: #001f3f;
         border: 0px;
-        /*border-radius: 24px;*/
-        background: #ffffff;
-        background-color: rgba(255, 255, 255, 0.3);
-        /*box-shadow: 5px 5px 10px #000000, -5px -5px 10px #ffffff;*/
-        transform: scale(1.0);
+        border-radius: 15px;
+        background: #73804d;
+        box-shadow: 8px 8px 16px #4b5332, -8px -8px 16px #9bad68;
     }
     
     button:hover {
-        background-color: rgba(255, 255, 255, 255);
+        background-color: #88975c;
     }
     
     button:active {
-        background-color: rgba(255, 255, 255, 255);
+        background: #73804d;
+        box-shadow: inset 12px 12px 10px #636e42, inset -12px -12px 10px #839258;
     }
     
-    .soft-shadow {
+    .pad1 {
+        overflow: hidden;
+        max-width: 350px;
+        color: #001f3f;
+        padding: 30px 30px;
+        border-radius: 0px;
+        background-color: #73804d;
+        height: 100%;
+        opacity: 0.2;
+    }
+    
+    .pad1:hover {
+        opacity: 1.0;
+    }
+    
+    .pad2 {
         overflow: hidden;
         max-width: 200px;
         color: #001f3f;
         padding: 30px 30px;
         border-radius: 20px;
-        /*background-color: transparent;*/
-        background-color: rgba(1, 1, 1, 0);
-        box-shadow: 10px 10px 8px rgba(1, 0, 0, 0.5);
-        /*opacity: 0.3;*/
-        transform: scale(0.5);
+        background-color: rgba(0, 0, 0, 0);
+        box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.5);
     }
     
-    .soft-shadow:hover {
+    .pad2:hover {
         background-color: rgba(255, 255, 255, 0.2);
     }
     
