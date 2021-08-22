@@ -102,7 +102,7 @@ function loop(gl, obj, deltaTime) {
 
     obs.draw_obj(obj, cframe.o);
 
-    rbt.show(obs, [cubeRotation, cubeRotation, -cubeRotation, cubeRotation, cubeRotation, 0.1]);
+    rbt.show(obs, [0, cubeRotation, -cubeRotation, cubeRotation, cubeRotation, 0.1]);
 
     cubeRotation += deltaTime;
 
