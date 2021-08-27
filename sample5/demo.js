@@ -4,11 +4,9 @@ let rbt = new robot_tool.robot();
 let btn = null;
 
 async function setup() {
-
     let canvas = document.querySelector("#glcanvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
 
     let info = init_ctrl(canvas, true);
 
@@ -17,6 +15,12 @@ async function setup() {
         alert("init WebGL err.");
         return;
     }
+
+    window.onresize = function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+    };
 
     let prog_in = await init_prog(gl, "vs2.glsl", "fs2.glsl", [
         "vertex", "normal"
@@ -46,10 +50,19 @@ async function setup() {
         div.appendChild(txt3);
 
         let txt2 = document.createElement("font");
-        txt2.innerHTML = "aefff<br />";
+        txt2.innerHTML = "kuka robot<br />";
         txt2.style.fontSize = "20px";
         div.appendChild(txt2);
 
+        div.iiii = div.iii = 1.0;
+
+        div.onclick = (e) => {
+            console.log("fefffffe");
+            div.iiii = 1.0 - div.iiii;
+            div.style.left = 0 + "px";
+            div.style.top = 0 + "px";
+            div.style.transform = "scale(" + 1 + ")";
+        };
 
     }
 
@@ -122,14 +135,25 @@ function loop(gl, obj, deltaTime) {
 
     let px = obs.to_screen(new vec3(0, 1000, 0));
     if (px) {
-        btn.style.left = px.x - btn.clientWidth / 2 + "px";
-        btn.style.top = px.y - btn.clientHeight + "px";
         let sc = 3000.0 * px.z;
         if (sc < 0.1) sc = 0.1;
         else if (sc > 2.0) sc = 2.0;
-        btn.style.transform = "scale(" + sc + ")";
+        let left = px.x - btn.clientWidth * 0.5;
+        let right = px.y - btn.clientHeight * 0.5 * (1.0 + sc);
+
+        btn.iii += (btn.iiii - btn.iii) * 0.1;
+        let i1 = btn.iii;
+        let i2 = 1.0 - i1;
+
+
+        let sc2 = 3.0;
+        let left2 = 400.0;
+        let right2 = 400.0;
+
+        btn.style.left = (left * i1 + left2 * i2) + "px";
+        btn.style.top = (right * i1 + right2 * i2) + "px";
+        btn.style.transform = "scale(" + (sc * i1 + sc2 * i2) + ")";
     }
-    console.log(document.activeElement.tagName);
 
 }
 
