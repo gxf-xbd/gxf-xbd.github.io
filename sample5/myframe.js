@@ -13,6 +13,8 @@ function init_ctrl(canvas, log = false) {
         canvas: canvas
     }
 
+    canvas.style.backgroundColor = "#000";
+
     for (let i in info.key) info.key[i] = false;
     for (let i in info.key_v) info.key_v[i] = 0;
 
@@ -69,10 +71,14 @@ function init_ctrl(canvas, log = false) {
         return true;
     });
     add_event("wheel", event => {
+
         if (!event.ctrlKey) {
-            info.scale_i -= event.wheelDelta / 180.0;
-            info.scale = Math.pow(1.3, info.scale_i);
-            logout("wh ", info.scale);
+            if (!(event.target === document.body)) return true;
+            else {
+                info.scale_i -= event.wheelDelta / 180.0;
+                info.scale = Math.pow(1.3, info.scale_i);
+                logout("wh ", info.scale);
+            }
         }
     });
 
@@ -117,6 +123,20 @@ function fetch_file(url, timeout = 5000) {
     });
 }
 
+function append_element(root, type = "font") {
+    let t = document.createElement(type);
+    root.appendChild(t);
+    return t;
+}
+
+function append_text(root, text, size = "10px") {
+    let t = document.createElement("font");
+    t.innerHTML = text;
+    t.style.fontSize = size;
+    root.appendChild(t);
+    return t;
+}
+
 async function init_prog(gl, vsSource, fsSource, attr = [], unif = []) {
 
     async function loadShader(gl, type, file) {
@@ -158,6 +178,10 @@ async function init_prog(gl, vsSource, fsSource, attr = [], unif = []) {
 
 
 class OBSERVE_3D {
+    constructor() {
+        this.objs = {};
+    }
+
     init(info, gl, prog_info, angle = 60.0) {
         this.gl = gl;
         this.info = info;
@@ -308,12 +332,14 @@ class OBSERVE_3D {
     }
 
     async open_obj(name) {
+        if (this.objs[name]) return this.objs[name];
+
         let gl = this.gl;
         if (!gl) return null;
 
         let obj = await fetch_file(name);
         if (!obj) return null;
-        //console.log(obj);
+        console.log("objload");
 
 
         let ps = [];
@@ -385,7 +411,7 @@ class OBSERVE_3D {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buf_idx);
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(idx), gl.STATIC_DRAW);
 
-        return {
+        return this.objs[name] = {
             gl: gl,
             pos: buf_pos,
             idx: buf_idx,

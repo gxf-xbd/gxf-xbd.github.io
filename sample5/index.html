@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>WebGL Demo</title>
 
+    <script src="js/echarts.js" defer></script>
     <script src="tensor.js" defer></script>
     <script src="glmat.js" defer></script>
     <script src="myframe.js" defer></script>
@@ -15,8 +16,9 @@
 
 <body>
     <div class="canv">
-        <canvas id="glcanvas"></canvas>
+        <canvas id="glcanvas" class="glcanv"></canvas>
     </div>
+
 
 
     <div id="main_div" class="pad1" width=400px height=300>
@@ -62,9 +64,9 @@
         width: 100%;
     }
     
-    canvas {
+    .glcanv {
         display: block;
-        background: #000000;
+        background: "rgba(0,0,0,0)";
     }
     
     button {
@@ -106,7 +108,6 @@
     
     .pad2 {
         overflow: hidden;
-        max-width: 200px;
         color: #001f3f;
         padding: 30px 30px;
         border-radius: 20px;
@@ -117,6 +118,16 @@
     
     .pad2:hover {
         background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .pad2_max {
+        overflow: hidden;
+        color: #001f3f;
+        padding: 30px 30px;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.5);
+        z-index: 0;
     }
     
     .canv {
