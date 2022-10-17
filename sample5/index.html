@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>WebGL Demo</title>
+
+    <script src="js/echarts.js" defer></script>
+    <script src="js/glmat.js" defer></script>
+    <script src="tensor.js" defer></script>
+    <script src="myframe.js" defer></script>
+    <script src="robot.js" defer></script>
+    <script src="demo.js" defer></script>
+
+</head>
+
+<body>
+    <div class="canv">
+        <canvas id="glcanvas" class="glcanv"></canvas>
+    </div>
+
+
+
+    <div id="main_div" class="pad1" width=400px height=300>
+        <font size="10"><b> KUKA </b></font>
+        </br>
+        <font size="10"><b> KR210-R2700 </b></font>
+        </br>
+        <span>
+            <input type="text" value="" style="font-size:30px; width:100%;height:50px">
+        </span>
+        </br>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button></br>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button></br>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button>
+        <button type="button" style="font-size:20px"><b>Click Me!</b></button></br>
+        <font size="5">
+            "model/kr20/0.obj",</br>
+            "model/kr20/1.obj",</br>
+            "model/kr20/2.obj",</br>
+            "model/kr20/3.obj",</br>
+            "model/kr20/4.obj", </br>
+            "model/kr20/5.obj", </br>
+            "model/kr20/6.obj") </font>
+        </br>
+    </div>
+
+
+</body>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        overflow: hidden;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .glcanv {
+        display: block;
+        background: "rgba(0,0,0,0)";
+    }
+
+    button {
+        margin: 20px;
+        padding: 20px 20px;
+        outline: none;
+        color: #001f3f;
+        border: 0px;
+        border-radius: 15px;
+        background: #73804d;
+        box-shadow: 8px 8px 16px #4b5332, -8px -8px 16px #9bad68;
+    }
+
+    button:hover {
+        background-color: #88975c;
+    }
+
+    button:active {
+        background: #73804d;
+        box-shadow: inset 12px 12px 10px #636e42, inset -12px -12px 10px #839258;
+    }
+
+    .pad1 {
+        overflow: hidden;
+        max-width: 350px;
+        color: #001f3f;
+        padding: 30px 30px;
+        border-radius: 0px;
+        background-color: #73804d;
+        height: 100%;
+        opacity: 0.2;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .pad1:hover {
+        opacity: 1.0;
+    }
+
+    .pad2 {
+        overflow: hidden;
+        color: #001f3f;
+        padding: 30px 30px;
+        border-radius: 20px;
+        background-color: rgba(0, 0, 0, 0);
+        box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.5);
+        z-index: 0;
+    }
+
+    .pad2:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .pad2_max {
+        overflow: hidden;
+        color: #001f3f;
+        padding: 30px 30px;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.5);
+        z-index: 0;
+    }
+
+    .canv {
+        position: absolute;
+        z-index: -1;
+    }
+</style>
+
+</html>
